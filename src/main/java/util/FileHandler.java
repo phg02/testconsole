@@ -12,7 +12,6 @@ import java.util.*;
 
 public class FileHandler {
     private StringToDate stringToDate;
-    private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private HashMap<String,Tenant> tenantsHashMap = new HashMap<>();
     private HashMap<String,Owner> ownersHashMap = new HashMap<>();
     private HashMap<String,Host> hostsHashMap = new HashMap<>();
@@ -26,7 +25,7 @@ public class FileHandler {
 
     public HashSet<Tenant> getTenantData() {
         // File path
-        final String filePathToTenant = "src/resource/tenant.txt";
+        final String filePathToTenant = "src/main/resources/tenant.txt";
 
         // List to store Tenant objects
         HashSet<Tenant> tenants = new HashSet<>();
@@ -69,7 +68,7 @@ public class FileHandler {
 
     public HashSet<Owner> getOwnerData() {
         // File path
-        final String filePathToOwner = "src/resource/owner.txt";
+        final String filePathToOwner = "src/main/resources/owner.txt";
 
         // List to store Tenant objects
         HashSet<Owner> owners = new HashSet<>();
@@ -113,7 +112,7 @@ public class FileHandler {
 
     public HashSet<Host> getHostData() {
         // File path
-        final String filePathToHost = "src/resource/host.txt";
+        final String filePathToHost = "src/main/resources/host.txt";
 
         // List to store Tenant objects
         HashSet<Host> hosts = new HashSet<>();
@@ -156,7 +155,7 @@ public class FileHandler {
     }
 
     public HashSet<ResidentialProperty> getResidentialProperty(){
-        String fileName = "src/resource/residentialProperty.txt";
+        String fileName = "src/main/resources/residentialProperty.txt";
         HashSet<ResidentialProperty> properties = new HashSet<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
@@ -193,7 +192,7 @@ public class FileHandler {
 
 
     public HashSet<CommercialProperty> getCommercialProperty(){
-        String fileName = "src/resource/commercialProperty.txt";
+        String fileName = "src/main/resources/commercialProperty.txt";
         HashSet<CommercialProperty> commercialProperties = new HashSet<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
@@ -229,7 +228,7 @@ public class FileHandler {
     }
 
     public HashSet<RentalAgreement> getRentalAgreement(){
-        String fileName = "src/resource/rentalAgreement.txt";
+        String fileName = "src/main/resources/rentalAgreement.txt";
         HashSet<RentalAgreement> rentalAgreements = new HashSet<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
@@ -268,6 +267,8 @@ public class FileHandler {
                 owner.addRentalAgreement(rentalAgreement);
                 owner.getCooperatingHosts().forEach(h -> h.addRentalAgreement(rentalAgreement));
                 owner.addCooperatingHost(host);
+                property.addHost(host);
+                host.addProperty(property);
                 host.addRentalAgreement(rentalAgreement);
                 host.addCooperatingOwner(owner);
                 mainTenant.addRentalAgreement(rentalAgreement);
@@ -286,7 +287,7 @@ public class FileHandler {
     }
 
     public HashSet<Payment> getPaymentData(){
-        String fileName = "src/resource/payment.txt";
+        String fileName = "src/main/resources/payment.txt";
         HashSet<Payment> payments = new HashSet<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {

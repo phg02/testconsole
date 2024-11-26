@@ -27,6 +27,11 @@ public class PaymentManagerImpl implements PaymentManagerController {
     }
 
     @Override
+    public Payment getPaymentByID(String id) {
+        return payments.stream().filter(payment -> payment.getId().equals(id)).findFirst().orElse(null);
+    }
+
+    @Override
     public boolean makePayment(String tenantId, String residentialPropertyId, double amount) {
         return false;
     }

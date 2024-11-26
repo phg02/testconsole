@@ -95,7 +95,7 @@ public class RentalAgreement {
         this.startDate = startDate;
     }
 
-    public Date getContract() {
+    public Date getStartDate() {
         return startDate;
     }
 

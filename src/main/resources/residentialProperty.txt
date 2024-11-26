@@ -1,0 +1,15 @@
+RP001|123 Main Street, Springfield|250000.00|AVAILABLE|O001|3|true|true
+RP002|45 Elm Avenue, Riverdale|180000.00|RENTED|O002|2|false|true
+RP003|78 Oak Lane, Hill Valley|320000.00|MAINTENANCE|O003|4|true|false
+RP004|9 Maple Drive, Sunnydale|150000.00|AVAILABLE|O004|2|false|false
+RP005|56 Pine Court, Brookfield|275000.00|AVAILABLE|O005|3|true|true
+RP006|31 Cedar Street, Greenfield|200000.00|MAINTENANCE|O006|2|false|true
+RP007|88 Birch Road, Rivertown|400000.00|RENTED|O007|5|true|true
+RP008|12 Ash Street, Willowbrook|220000.00|AVAILABLE|O008|3|false|false
+RP009|67 Cherry Avenue, Meadowlake|310000.00|MAINTENANCE|O009|4|true|true
+RP010|101 Sycamore Drive, Lakeside|280000.00|AVAILABLE|O010|3|false|true
+RP011|14 Poplar Lane, Bayshore|190000.00|RENTED|O011|2|false|false
+RP012|25 Aspen Way, Mountainview|330000.00|AVAILABLE|O012|4|true|true
+RP013|89 Redwood Terrace, Forestview|350000.00|RENTED|O013|4|true|true
+RP014|7 Dogwood Place, Seaview|240000.00|AVAILABLE|O014|3|true|false
+RP015|63 Magnolia Circle, Clearfield|260000.00|RENTED|O015|3|true|true
