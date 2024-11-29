@@ -1,4 +1,7 @@
 package viewer;
+/*
+  @author <Nguyen Minh Phuong - s4063236>
+ */
 
 import controller.impl.HostManagerImpl;
 import model.Host;
@@ -11,14 +14,26 @@ import java.util.HashSet;
 import java.time.ZoneId;
 import java.util.Scanner;
 
+/**
+ * Viewer class for managing hosts.
+ * Provides methods to display and interact with host data.
+ */
 public class HostManagementViewer {
     private HostManagerImpl hostManager;
     private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+    /**
+     * Constructor to initialize the host manager.
+     *
+     * @param hostManager The host manager implementation.
+     */
     public HostManagementViewer(HostManagerImpl hostManager) {
         this.hostManager = hostManager;
     }
 
+    /**
+     * Prints the host management menu options to the console.
+     */
     public void printHostManagementMenu(){
         System.out.println("==========================================");
         System.out.println("|           Host Management              |");
@@ -35,9 +50,12 @@ public class HostManagementViewer {
         System.out.println("Enter your choice: ");
     }
 
+    /**
+     * Manages the host viewer operations based on user input.
+     */
     public void hostViewerManager(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("You have chosen to check the host dashboard.");
+        System.out.println("Host Management");
         boolean exitHost = false;
         try{
             while (!exitHost) {
@@ -47,31 +65,42 @@ public class HostManagementViewer {
                 switch (choiceHost) {
                     case 1:
                         System.out.println("Add Host");
+                        System.out.println("Functionality not implemented yet due to assignment requirements.");
                         break;
                     case 2:
                         System.out.println("Update Host");
+                        System.out.println("Functionality not implemented yet due to assignment requirements.");
                         break;
                     case 3:
                         System.out.println("Delete Host");
+                        System.out.println("Functionality not implemented yet due to assignment requirements.");
                         break;
                     case 4:
                         System.out.println("View All Hosts");
                         printAllHosts();
+                        System.out.println("Press Enter to continue...");
+                        scanner.nextLine();
                         break;
                     case 5:
                         System.out.println("Search Host by ID");
                         String id = scanner.nextLine();
                         printHostByID(id);
+                        System.out.println("Press Enter to continue...");
+                        scanner.nextLine();
                         break;
                     case 6:
                         System.out.println("Search Host by Full Name");
                         String fullName = scanner.nextLine();
                         printHostByFullName(fullName);
+                        System.out.println("Press Enter to continue...");
+                        scanner.nextLine();
                         break;
                     case 7:
                         System.out.println("Search Host by Contact Info");
                         String contactInfo = scanner.nextLine();
                         printHostByContactInformation(contactInfo);
+                        System.out.println("Press Enter to continue...");
+                        scanner.nextLine();
                         break;
                     case 8:
                         System.out.println("Exiting Host Management");
@@ -87,10 +116,18 @@ public class HostManagementViewer {
         }
     }
 
+    /**
+     * Prints all hosts in a tabular format.
+     */
     public void printAllHosts(){
         printTable(hostManager.getAllHosts());
     }
 
+    /**
+     * Prints a host by their contact information.
+     *
+     * @param contactInformation The contact information of the host.
+     */
     public void printHostByContactInformation(String contactInformation){
         Host host = hostManager.getHostByContactInformation(contactInformation);
         if(host != null) {
@@ -103,6 +140,11 @@ public class HostManagementViewer {
         }
     }
 
+    /**
+     * Prints a host by their ID.
+     *
+     * @param id The ID of the host.
+     */
     public void printHostByID(String id){
         Host host = hostManager.getHostByID(id);
         if(host != null) {
@@ -115,6 +157,11 @@ public class HostManagementViewer {
         }
     }
 
+    /**
+     * Prints hosts by their full name.
+     *
+     * @param fullName The full name of the host.
+     */
     public void printHostByFullName(String fullName){
         HashSet<Host> hosts = hostManager.getHostByFullName(fullName);
         if(!hosts.isEmpty()) {
@@ -125,6 +172,11 @@ public class HostManagementViewer {
         }
     }
 
+    /**
+     * Prints a table of hosts with their details.
+     *
+     * @param hosts The set of hosts to be printed.
+     */
     public void printTable(HashSet<Host> hosts) {
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.printf("| %-10s | %-20s | %-15s | %-30s | %-30s | %-30s | %-30s |\n",

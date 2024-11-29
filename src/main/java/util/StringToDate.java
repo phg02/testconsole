@@ -1,4 +1,7 @@
 package util;
+/*
+  @author <Nguyen Minh Phuong - s4063236>
+ */
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

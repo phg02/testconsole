@@ -1,4 +1,7 @@
 package viewer;
+/*
+  @author <Nguyen Minh Phuong - s4063236>
+ */
 
 import controller.impl.TenantManagerImpl;
 import model.Payment;
@@ -10,15 +13,27 @@ import java.util.HashSet;
 import java.time.ZoneId;
 import java.util.Scanner;
 
+/**
+ * Viewer class for managing tenants.
+ * Provides methods to display and interact with tenant data.
+ */
 public class TenantManagementViewer {
     private TenantManagerImpl tenantManager;
     private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public TenantManagementViewer(TenantManagerImpl tenantManager){
+    /**
+     * Constructor to initialize the tenant manager.
+     *
+     * @param tenantManager The tenant manager implementation.
+     */
+    public TenantManagementViewer(TenantManagerImpl tenantManager) {
         this.tenantManager = tenantManager;
     }
 
-    public void printTenantManagementMenu(){
+    /**
+     * Prints the tenant management menu options to the console.
+     */
+    public void printTenantManagementMenu() {
         System.out.println("==========================================");
         System.out.println("|           Tenant Management            |");
         System.out.println("==========================================");
@@ -34,11 +49,14 @@ public class TenantManagementViewer {
         System.out.println("Enter your choice: ");
     }
 
-    public void tenantViewerManager(){
+    /**
+     * Manages the tenant viewer operations based on user input.
+     */
+    public void tenantViewerManager() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("You have chosen to check the tenant dashboard.");
+        System.out.println("Tenant dashboard.");
         boolean exitTenant = false;
-        try{
+        try {
             while (!exitTenant) {
                 printTenantManagementMenu();
                 int choiceTenant = scanner.nextInt();
@@ -46,31 +64,42 @@ public class TenantManagementViewer {
                 switch (choiceTenant) {
                     case 1:
                         System.out.println("Add Tenant");
+                        System.out.println("Functionality not implemented yet due to assignment requirements.");
                         break;
                     case 2:
                         System.out.println("Update Tenant");
+                        System.out.println("Functionality not implemented yet due to assignment requirements.");
                         break;
                     case 3:
                         System.out.println("Delete Tenant");
+                        System.out.println("Functionality not implemented yet due to assignment requirements.");
                         break;
                     case 4:
                         System.out.println("View All Tenants");
                         printAllTenants();
+                        System.out.println("Press Enter to continue...");
+                        scanner.nextLine();
                         break;
                     case 5:
                         System.out.println("Search Tenant by ID");
                         String id = scanner.nextLine();
                         printTenantByID(id);
+                        System.out.println("Press Enter to continue...");
+                        scanner.nextLine();
                         break;
                     case 6:
                         System.out.println("Search Tenant by Full Name");
                         String fullName = scanner.nextLine();
                         printTenantByFullName(fullName);
+                        System.out.println("Press Enter to continue...");
+                        scanner.nextLine();
                         break;
                     case 7:
                         System.out.println("Search Tenant by Contact Info");
                         String contactInfo = scanner.nextLine();
                         printTenantByContactInformation(contactInfo);
+                        System.out.println("Press Enter to continue...");
+                        scanner.nextLine();
                         break;
                     case 8:
                         System.out.println("Exiting Tenant Management");
@@ -81,75 +110,94 @@ public class TenantManagementViewer {
                         break;
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Invalid input. Please try again.");
         }
     }
 
-    public void printAllTenants(){
+    /**
+     * Prints all tenants in a tabular format.
+     */
+    public void printAllTenants() {
         printTable(tenantManager.getAllTenants());
     }
 
-    public void printTenantByContactInformation(String contactInformation){
+    /**
+     * Prints a tenant by their contact information.
+     *
+     * @param contactInformation The contact information of the tenant.
+     */
+    public void printTenantByContactInformation(String contactInformation) {
         Tenant tenant = tenantManager.getTenantByContactInformation(contactInformation);
-        if(tenant != null) {
+        if (tenant != null) {
             HashSet<Tenant> tenants = new HashSet<>();
             tenants.add(tenant);
             printTable(tenants);
-        }
-        else{
+        } else {
             System.out.println("Tenant not found");
         }
     }
 
-    public void printTenantByID(String id){
+    /**
+     * Prints a tenant by their ID.
+     *
+     * @param id The ID of the tenant.
+     */
+    public void printTenantByID(String id) {
         Tenant tenant = tenantManager.getTenantByID(id);
-        if(tenant != null) {
+        if (tenant != null) {
             HashSet<Tenant> tenants = new HashSet<>();
             tenants.add(tenant);
             printTable(tenants);
-        }
-        else{
+        } else {
             System.out.println("Tenant not found");
         }
     }
 
-    public void printTenantByFullName(String fullName){
+    /**
+     * Prints tenants by their full name.
+     *
+     * @param fullName The full name of the tenant.
+     */
+    public void printTenantByFullName(String fullName) {
         HashSet<Tenant> tenants = tenantManager.getTenantByFullName(fullName);
-        if(!tenants.isEmpty()) {
+        if (!tenants.isEmpty()) {
             printTable(tenants);
-        }
-        else{
-            System.out.println("No tenant with the name "+ fullName + " was found");
+        } else {
+            System.out.println("No tenant with the name " + fullName + " was found");
         }
     }
 
-
+    /**
+     * Prints a table of tenants with their details.
+     *
+     * @param tenants The set of tenants to be printed.
+     */
     public void printTable(HashSet<Tenant> tenants) {
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.printf("| %-10s | %-20s | %-15s | %-30s | %-30s | %-30s |\n",
                 "Tenant ID", "Full Name", "Date of Birth", "Contact Info", "Rental Agreement IDs", "Payment IDs");
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
-        for (Tenant tenant : tenants ) {
+        for (Tenant tenant : tenants) {
             String[] rentalIDs = new String[tenant.getRentalAgreements().size()];
             StringBuilder rentalIdString = new StringBuilder();
             int i = 0;
-            for (RentalAgreement rental : tenant.getRentalAgreements()){
-                rentalIDs[i]= rental.getId();
+            for (RentalAgreement rental : tenant.getRentalAgreements()) {
+                rentalIDs[i] = rental.getId();
                 i++;
             }
-            for(i = 0; i < rentalIDs.length-2; i++){
+            for (i = 0; i < rentalIDs.length - 2; i++) {
                 rentalIdString.append(rentalIDs[i]).append(", ");
             }
             rentalIdString.append(rentalIDs[rentalIDs.length - 1]);
             String[] paymentIDs = new String[tenant.getPayments().size()];
             StringBuilder paymentIdString = new StringBuilder();
             int z = 0;
-            for (Payment payment : tenant.getPayments()){
-                paymentIDs[z]= payment.getId();
+            for (Payment payment : tenant.getPayments()) {
+                paymentIDs[z] = payment.getId();
                 z++;
             }
-            for(z = 0; z < paymentIDs.length-2; z++){
+            for (z = 0; z < paymentIDs.length - 2; z++) {
                 paymentIdString.append(paymentIDs[z]).append(", ");
             }
             paymentIdString.append(paymentIDs[paymentIDs.length - 1]);

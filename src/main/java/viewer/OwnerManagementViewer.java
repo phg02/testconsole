@@ -1,4 +1,7 @@
 package viewer;
+/*
+  @author <Nguyen Minh Phuong - s4063236>
+ */
 
 import controller.impl.OwnerManagerImpl;
 import model.Host;
@@ -11,13 +14,27 @@ import java.util.HashSet;
 import java.time.ZoneId;
 import java.util.Scanner;
 
+/**
+ * Viewer class for managing owners.
+ * Provides methods to display and interact with owner data.
+ */
 public class OwnerManagementViewer {
-    private OwnerManagerImpl ownerManager;
+    private final OwnerManagerImpl ownerManager;
     private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+    /**
+     * Constructor to initialize the owner manager.
+     *
+     * @param ownerManager The owner manager implementation.
+     */
     public OwnerManagementViewer(OwnerManagerImpl ownerManager) {
         this.ownerManager = ownerManager;
-    }public void printOwnerManagementMenu(){
+    }
+
+    /**
+     * Prints the owner management menu options to the console.
+     */
+    public void printOwnerManagementMenu(){
         System.out.println("==========================================");
         System.out.println("|           Owner Management             |");
         System.out.println("==========================================");
@@ -33,9 +50,12 @@ public class OwnerManagementViewer {
         System.out.println("Enter your choice: ");
     }
 
+    /**
+     * Manages the owner viewer operations based on user input.
+     */
     public void ownerViewerManager(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("You have chosen to check the owner dashboard.");
+        System.out.println("Owner Management");
         boolean exitOwner = false;
         try{
             while (!exitOwner) {
@@ -45,31 +65,42 @@ public class OwnerManagementViewer {
                 switch (choiceOwner) {
                     case 1:
                         System.out.println("Add Owner");
+                        System.out.println("Functionality not implemented yet due to assignment requirements.");
                         break;
                     case 2:
                         System.out.println("Update Owner");
+                        System.out.println("Functionality not implemented yet due to assignment requirements.");
                         break;
                     case 3:
                         System.out.println("Delete Owner");
+                        System.out.println("Functionality not implemented yet due to assignment requirements.");
                         break;
                     case 4:
                         System.out.println("View All Owners");
                         printAllOwners();
+                        System.out.println("Press Enter to continue...");
+                        scanner.nextLine();
                         break;
                     case 5:
                         System.out.println("Search Owner by ID");
                         String id = scanner.nextLine();
                         printOwnerByID(id);
+                        System.out.println("Press Enter to continue...");
+                        scanner.nextLine();
                         break;
                     case 6:
                         System.out.println("Search Owner by Full Name");
                         String fullName = scanner.nextLine();
                         printOwnerByFullName(fullName);
+                        System.out.println("Press Enter to continue...");
+                        scanner.nextLine();
                         break;
                     case 7:
                         System.out.println("Search Owner by Contact Info");
                         String contactInfo = scanner.nextLine();
                         printOwnerByContactInformation(contactInfo);
+                        System.out.println("Press Enter to continue...");
+                        scanner.nextLine();
                         break;
                     case 8:
                         System.out.println("Exiting Owner Management");
@@ -85,10 +116,18 @@ public class OwnerManagementViewer {
         }
     }
 
+    /**
+     * Prints all owners in a tabular format.
+     */
     public void printAllOwners(){
         printTable(ownerManager.getAllOwners());
     }
 
+    /**
+     * Prints an owner by their contact information.
+     *
+     * @param contactInformation The contact information of the owner.
+     */
     public void printOwnerByContactInformation(String contactInformation){
         Owner owner = ownerManager.getOwnerByContactInformation(contactInformation);
         if(owner != null) {
@@ -101,6 +140,11 @@ public class OwnerManagementViewer {
         }
     }
 
+    /**
+     * Prints an owner by their ID.
+     *
+     * @param id The ID of the owner.
+     */
     public void printOwnerByID(String id){
         Owner owner = ownerManager.getOwnerByID(id);
         if(owner != null) {
@@ -113,6 +157,11 @@ public class OwnerManagementViewer {
         }
     }
 
+    /**
+     * Prints owners by their full name.
+     *
+     * @param fullName The full name of the owner.
+     */
     public void printOwnerByFullName(String fullName){
         HashSet<Owner> owners = ownerManager.getOwnerByFullName(fullName);
         if(!owners.isEmpty()) {
@@ -123,6 +172,11 @@ public class OwnerManagementViewer {
         }
     }
 
+    /**
+     * Prints a table of owners with their details.
+     *
+     * @param owners The set of owners to be printed.
+     */
     public void printTable(HashSet<Owner> owners) {
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.printf("| %-10s | %-20s | %-15s | %-30s | %-30s | %-30s | %-30s |\n",
